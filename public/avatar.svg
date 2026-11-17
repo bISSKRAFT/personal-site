@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 380" role="img" aria-label="Stylized operative portrait">
+  <defs>
+    <linearGradient id="skin" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3a0d16"/>
+      <stop offset="1" stop-color="#14060a"/>
+    </linearGradient>
+    <linearGradient id="scan" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff2d3f" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#ff2d3f" stop-opacity="0.05"/>
+    </linearGradient>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M20 0H0V20" fill="none" stroke="#ff2d3f" stroke-opacity="0.13" stroke-width="1"/>
+    </pattern>
+    <clipPath id="headClip">
+      <path d="M160 46c-45 0-66 34-66 84 0 36 13 58 28 77l7 29c2 19 15 31 31 31s29-12 31-31l7-29c15-19 28-41 28-77 0-50-21-84-66-84z"/>
+    </clipPath>
+  </defs>
+
+  <rect width="320" height="380" fill="#120609"/>
+  <rect width="320" height="380" fill="url(#grid)"/>
+
+  <!-- targeting marks -->
+  <g stroke="#ff2d3f" stroke-opacity="0.45" fill="none" stroke-width="1">
+    <path d="M16 16h30M16 16v30M304 16h-30M304 16v30M16 364h30M16 364v-30M304 364h-30M304 364v-30"/>
+    <circle cx="160" cy="150" r="118" stroke-dasharray="4 10" stroke-opacity="0.25"/>
+    <path d="M160 12v22M160 266v22M22 150h22M276 150h22"/>
+  </g>
+
+  <!-- head -->
+  <g clip-path="url(#headClip)">
+    <path d="M94 40h132v240H94z" fill="url(#skin)"/>
+    <rect x="94" y="46" width="132" height="220" fill="url(#scan)"/>
+    <g stroke="#ff2d3f" stroke-opacity="0.35" stroke-width="2">
+      <path d="M94 78h132M94 112h132M94 146h132M94 180h132M94 214h132M94 248h132"/>
+    </g>
+    <!-- visor -->
+    <path d="M112 132h96l-10 24h-76z" fill="#0a0406" stroke="#ff2d3f" stroke-width="2"/>
+    <path d="M122 144h76" stroke="#ff6a71" stroke-width="2" stroke-opacity="0.8"/>
+    <path d="M150 132v24M170 132v24" stroke="#ff2d3f" stroke-opacity="0.5"/>
+    <!-- jaw detail -->
+    <path d="M130 212h60M138 232h44" stroke="#ff2d3f" stroke-opacity="0.55" stroke-width="1.5"/>
+    <path d="M160 156v48" stroke="#ff2d3f" stroke-opacity="0.3" stroke-dasharray="4 6"/>
+  </g>
+  <path d="M160 46c-45 0-66 34-66 84 0 36 13 58 28 77l7 29c2 19 15 31 31 31s29-12 31-31l7-29c15-19 28-41 28-77 0-50-21-84-66-84z" fill="none" stroke="#ff2d3f" stroke-width="2" stroke-opacity="0.9"/>
+
+  <!-- shoulders -->
+  <path d="M62 380c4-46 38-74 98-74s94 28 98 74z" fill="#19070b" stroke="#ff2d3f" stroke-width="2"/>
+  <path d="M118 318l42 34 42-34M160 352v28" fill="none" stroke="#ff2d3f" stroke-opacity="0.55"/>
+  <path d="M92 344l-14 36M228 344l14 36" stroke="#ff2d3f" stroke-opacity="0.35"/>
+
+  <!-- data strip -->
+  <g fill="#ff2d3f" font-family="monospace" font-size="10" letter-spacing="2">
+    <text x="16" y="304" opacity="0.75">SUBJECT // 042</text>
+    <text x="16" y="320" opacity="0.45">BIO_SCAN: OK</text>
+  </g>
+  <path d="M16 330h96" stroke="#ff2d3f" stroke-opacity="0.6"/>
+</svg>

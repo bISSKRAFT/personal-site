@@ -1,0 +1,43 @@
+---
+import { site } from '../data/site';
+---
+
+<section class="section contact" id="contact">
+  <div class="shell contact__grid">
+    <div data-reveal>
+      <p class="eyebrow"><span class="eyebrow__bar"></span> // OPEN CHANNEL</p>
+      <h2 class="contact__lead">Got a job, an idea, or a good story?</h2>
+      <p class="contact__text">
+        My inbox is always open. Send a message and I'll get back to you within 48 hours — usually faster.
+      </p>
+      <p class="contact__status"><span class="pulse-dot" aria-hidden="true"></span> {site.availability}</p>
+    </div>
+
+    <div class="terminal panel" data-reveal>
+      <div class="terminal__bar">
+        <span>root@datashard:~/comms</span>
+        <span class="terminal__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+      </div>
+      <div class="terminal__body">
+        <p class="terminal__line terminal__line--command">
+          <span class="terminal__prompt">visitor@grid:~$</span>{" "}
+          <span data-type="./open_channel --to operator">./open_channel --to operator</span><span class="blink" aria-hidden="true">_</span>
+        </p>
+        <p class="terminal__line">&gt; establishing secure connection...</p>
+        <p class="terminal__line terminal__success">&gt; ACCESS GRANTED. channel ready.</p>
+        <a class="terminal__mail" href={`mailto:${site.email}`}>{site.email}</a>
+        <div class="terminal__actions">
+          <button class="btn btn--ghost" type="button" data-copy={site.email}>COPY ADDRESS</button>
+          <a class="btn btn--solid" href={`mailto:${site.email}`}>SEND MESSAGE</a>
+        </div>
+        <div class="socials">
+          {site.socials.map((social) => (
+            <a href={social.url} target="_blank" rel="noopener noreferrer">
+              {social.label}<span>{social.handle}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

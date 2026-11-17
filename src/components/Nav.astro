@@ -1,0 +1,39 @@
+---
+import { site } from '../data/site';
+
+const links = [
+  { href: '#identity', label: '01 // Identity' },
+  { href: '#cv', label: '02 // CV' },
+  { href: '#projects', label: '03 // Projects' },
+  { href: '#contact', label: '04 // Contact' },
+];
+---
+
+<header class="site-header">
+  <div class="shell header-inner">
+    <a class="brand" href="#top" aria-label={`${site.name} — back to top`}>
+      <span class="brand__mark">{site.initials}</span>
+      <span class="brand__text">Net<span class="brand__slash">//</span>Runner</span>
+    </a>
+
+    <nav class="nav" id="primary-nav" aria-label="Primary navigation">
+      {links.map((link) => <a href={link.href}>{link.label}</a>)}
+    </nav>
+
+    <div class="header-status">
+      <span class="pulse-dot" aria-hidden="true"></span>
+      <span>SYS ONLINE</span>
+      <span class="clock" data-clock data-timezone={site.timezone}>--:--:--</span>
+    </div>
+
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-label="Toggle navigation"
+      aria-expanded="false"
+      aria-controls="primary-nav"
+    >
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>

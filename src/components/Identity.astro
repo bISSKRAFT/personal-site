@@ -1,0 +1,76 @@
+---
+import { site } from '../data/site';
+
+interface InfoRow {
+  label: string;
+  value: string;
+  encrypted?: boolean;
+}
+
+const info: InfoRow[] = [
+  { label: 'Location', value: site.location },
+  { label: 'Email', value: site.email },
+  { label: 'Comms', value: site.commsMask, encrypted: true },
+  { label: 'Languages', value: site.languages },
+  { label: 'Availability', value: site.availability },
+  { label: 'Clearance', value: site.clearance },
+];
+---
+
+<section class="section identity" id="identity">
+  <div class="shell">
+    <div class="section-head" data-reveal>
+      <div class="section-head__num">01</div>
+      <div class="section-head__text">
+        <p class="section-head__kicker">// PERSONAL INFORMATION</p>
+        <h2 class="section-head__title">Identity</h2>
+      </div>
+      <div class="section-head__rule" aria-hidden="true"></div>
+    </div>
+
+    <div class="identity__grid">
+      <div data-reveal>
+        <p class="identity__lead">{site.tagline}</p>
+        <p class="identity__text">{site.bio}</p>
+        <blockquote class="identity__quote">
+          &gt; “{site.motto}”
+          <span>LOG ENTRY // 042.7</span>
+        </blockquote>
+
+        <div class="chips" aria-label="Interests">
+          {site.interests.map((interest) => <span class="chip">{interest}</span>)}
+        </div>
+      </div>
+
+      <div data-reveal>
+        <dl class="info-list">
+          {info.map((row) => (
+            <div class="info-list__row">
+              <dt>{row.label}</dt>
+              <dd>
+                {row.encrypted ? (
+                  <div class="cipher-block">
+                    <span class="cipher" role="img" aria-label="Phone number withheld — channel encrypted">
+                      <span class="cipher__mask">{row.value}</span>
+                      <span class="cipher__hex">{site.commsKey}</span>
+                    </span>
+                    <button class="cipher__btn" type="button" data-cipher-button>DECRYPT</button>
+                    <span class="cipher__result" data-cipher-result aria-live="polite">CHANNEL SEALED</span>
+                  </div>
+                ) : row.value}
+              </dd>
+            </div>
+          ))}
+        </dl>
+
+        <div class="chips" aria-label="Social links">
+          {site.socials.map((social) => (
+            <a class="chip" href={social.url} target="_blank" rel="noopener noreferrer">
+              {social.label}: {social.handle}
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

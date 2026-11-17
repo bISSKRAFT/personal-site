@@ -1,0 +1,82 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = `${site.name} // ${site.role}`, description = site.bio } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const canonical = new URL(base, Astro.site ?? new URL('https://username.github.io')).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <script is:inline>
+      // Never leave scroll-reveal content invisible if the JS bundle fails.
+      // The main script removes the timer by setting data-reveal-ready.
+      document.documentElement.classList.add('js');
+      var revealFailSafe = window.setTimeout(function () {
+        if (!document.documentElement.hasAttribute('data-reveal-ready')) {
+          document.documentElement.classList.remove('js');
+        }
+      }, 2500);
+      window.addEventListener(
+        'error',
+        function () {
+          window.clearTimeout(revealFailSafe);
+          document.documentElement.classList.remove('js');
+        },
+        true,
+      );
+    </script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#080406" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700;800&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">SKIP TO CONTENT</a>
+
+    <div class="crt" aria-hidden="true">
+      <div class="crt__grid"></div>
+      <div class="crt__scanlines"></div>
+      <div class="crt__vignette"></div>
+      <div class="crt__edge"></div>
+    </div>
+
+    <Nav />
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <Footer />
+
+    <script>
+      import '../scripts/main.ts';
+    </script>
+  </body>
+</html>
