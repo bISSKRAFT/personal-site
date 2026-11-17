@@ -1,86 +1,119 @@
 ---
+import Shard from './Shard.astro';
 import { site } from '../data/site';
 
 const { experience, education, skills } = site.cv;
 ---
 
-<section class="section cv" id="cv">
-  <div class="shell">
-    <div class="section-head" data-reveal>
-      <div class="section-head__num">02</div>
-      <div class="section-head__text">
-        <p class="section-head__kicker">// CURRICULUM VITAE</p>
-        <h2 class="section-head__title">Career Log</h2>
-      </div>
-      <div class="section-head__rule" aria-hidden="true"></div>
-    </div>
+<Shard id="cv" index="02" code="0x02" label="CURRICULUM VITAE" title="Career Log">
+  <div class="cv__layout">
+    <div>
+      <div class="netmap">
+        <div class="netmap__toolbar num">
+          <span>NETRUNNER_ACCESS // PATH_0x02</span>
+          <span>BUFFER <b>06</b></span>
+          <span>ICE BYPASSED</span>
+        </div>
 
-    <div class="cv__layout">
-      <div>
-        <div class="cv__group" data-reveal>
+        <div class="cv__group">
           <h3 class="cv__subhead">// WORK HISTORY</h3>
           <div class="timeline">
-            {experience.map((job) => (
-              <article class="timeline__item">
-                <div class="timeline__top">
-                  <h4 class="timeline__role">{job.role}</h4>
-                  <span class="timeline__period">{job.period}</span>
+            {experience.map((job, i) => (
+              <div class="netnode">
+                <div class="netnode__rail" aria-hidden="true">
+                  <span class="netnode__id num">N{String(i + 1).padStart(2, '0')}</span>
+                  <span class="netnode__dot"></span>
+                  <span class="netnode__link"></span>
                 </div>
-                <p class="timeline__org">{job.company} <span>// {job.location}</span></p>
-                <p class="timeline__summary">{job.summary}</p>
-                <ul class="timeline__points">
-                  {job.points.map((point) => <li>{point}</li>)}
-                </ul>
-                <div class="timeline__stack">
-                  {job.stack.map((tool) => <span>{tool}</span>)}
-                </div>
-              </article>
+                <article class="timeline__item record">
+                  <div class="record__bar num">
+                    <span>LOG_0x02.{String(i + 1).padStart(2, '0')}</span>
+                    <span>WORK RECORD</span>
+                  </div>
+                  <div class="timeline__top">
+                    <h4 class="timeline__role">{job.role}</h4>
+                    <span class="timeline__period num">{job.period}</span>
+                  </div>
+                  <p class="timeline__org">{job.company} <span>// {job.location}</span></p>
+                  <p class="timeline__summary">{job.summary}</p>
+                  <ul class="timeline__points">
+                    {job.points.map((point) => <li>{point}</li>)}
+                  </ul>
+                  <div class="timeline__stack">
+                    {job.stack.map((tool) => <span>{tool}</span>)}
+                  </div>
+                </article>
+              </div>
             ))}
           </div>
         </div>
 
-        <div class="cv__group" data-reveal>
+        <div class="netmap__bridge" aria-hidden="true">
+          <span>◈ RELAY_01</span>
+          <span class="netmap__bridge-line"></span>
+          <span>ACCESS GRANTED</span>
+        </div>
+
+        <div class="cv__group">
           <h3 class="cv__subhead">// EDUCATION &amp; CERTS</h3>
           <div class="timeline">
-            {education.map((entry) => (
-              <article class="timeline__item">
-                <div class="timeline__top">
-                  <h4 class="timeline__role">{entry.degree}</h4>
-                  <span class="timeline__period">{entry.period}</span>
+            {education.map((entry, i) => (
+              <div class="netnode">
+                <div class="netnode__rail" aria-hidden="true">
+                  <span class="netnode__id num">E{String(i + 1).padStart(2, '0')}</span>
+                  <span class="netnode__dot"></span>
+                  <span class="netnode__link"></span>
                 </div>
-                <p class="timeline__org">{entry.school}</p>
-                <p class="timeline__summary">{entry.detail}</p>
-              </article>
+                <article class="timeline__item record">
+                  <div class="record__bar num">
+                    <span>LOG_0x02.E{String(i + 1).padStart(2, '0')}</span>
+                    <span>EDU RECORD</span>
+                  </div>
+                  <div class="timeline__top">
+                    <h4 class="timeline__role">{entry.degree}</h4>
+                    <span class="timeline__period num">{entry.period}</span>
+                  </div>
+                  <p class="timeline__org">{entry.school}</p>
+                  <p class="timeline__summary">{entry.detail}</p>
+                </article>
+              </div>
             ))}
           </div>
         </div>
+
+        <div class="netmap__bridge" aria-hidden="true">
+          <span>◈ ROOT</span>
+          <span class="netmap__bridge-line"></span>
+          <span>DAEMON LOADOUT READY</span>
+        </div>
+      </div>
+    </div>
+
+    <aside class="cv__aside" aria-label="Technical skills">
+      <div class="panel record">
+        <h3 class="cv__aside-title">// SKILL MATRIX</h3>
+        <p class="daemon-tag num">DAEMON LOADOUT // SLOT_04</p>
+        {skills.map((group) => (
+          <div class="skill-group">
+            <p class="skill-group__title">{group.category}</p>
+            {group.skills.map((skill) => (
+              <div class="skill">
+                <div class="skill__top">
+                  <span>{skill.name}</span>
+                  <span class="num">{String(skill.level).padStart(2, '0')}%</span>
+                </div>
+                <div class="skill__bar" style={`--level: ${skill.level}%`} aria-hidden="true">
+                  <i></i>
+                </div>
+              </div>
+            ))}
+          </div>
+        ))}
       </div>
 
-      <aside class="cv__aside" data-reveal aria-label="Technical skills">
-        <div class="panel">
-          <h3 class="cv__aside-title">// SKILL MATRIX</h3>
-          {skills.map((group) => (
-            <div class="skill-group">
-              <p class="skill-group__title">{group.category}</p>
-              {group.skills.map((skill) => (
-                <div class="skill">
-                  <div class="skill__top">
-                    <span>{skill.name}</span>
-                    <span>{String(skill.level).padStart(2, '0')}%</span>
-                  </div>
-                  <div class="skill__bar" style={`--level: ${skill.level}%`} aria-hidden="true">
-                    <i></i>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
-
-        <button class="btn btn--ghost cv__print" id="print-cv" type="button">
-          EXPORT DOSSIER // PDF
-        </button>
-      </aside>
-    </div>
+      <button class="btn btn--ghost cv__print" id="print-cv" type="button">
+        EXPORT DOSSIER // PDF
+      </button>
+    </aside>
   </div>
-</section>
+</Shard>

@@ -1,0 +1,60 @@
+---
+interface Props {
+  id: string;
+  index: string;
+  code: string;
+  label: string;
+  title?: string;
+  class?: string;
+}
+
+const { id, index, code, label, title, class: className = '' } = Astro.props;
+
+// Decorative file metadata derived from the shard index — not real content.
+const seed = Number.parseInt(index, 10) || 0;
+const checksum = (0x7f2a + seed * 0x39).toString(16).toUpperCase().padStart(4, '0');
+const sizeHex = (seed * 37 + 118).toString(16).toUpperCase().padStart(3, '0');
+---
+
+<section class:list={['section', 'shard-section', className]} id={id}>
+  <div class="shell">
+    <div class="panel shard" data-reveal>
+      <span class="shard__reticle shard__reticle--tr" aria-hidden="true"></span>
+      <span class="shard__reticle shard__reticle--bl" aria-hidden="true"></span>
+      <span class="shard__sweep" aria-hidden="true"></span>
+
+      <header class="shard__bar">
+        <span class="shard__code">DATASHARD_{code}</span>
+        <span class="shard__label">{label}</span>
+        <span class="shard__meta num">CHK <b>{checksum}</b> · {sizeHex}KB</span>
+        <span class="shard__status"><span class="pulse-dot"></span> PARSED</span>
+      </header>
+
+      {
+        title && (
+          <div class="shard__head">
+            <div class="section-head">
+              <div class="section-head__num">{index}</div>
+              <div class="section-head__text">
+                <p class="section-head__kicker">// FILE {index} OF 04</p>
+                <h2 class="section-head__title">{title}</h2>
+              </div>
+              <div class="section-head__rule" aria-hidden="true"></div>
+            </div>
+          </div>
+        )
+      }
+
+      <div class:list={['shard__body', { 'shard__body--bare': !title }]}>
+        <slot />
+      </div>
+
+      <footer class="shard__footer">
+        <span>SECTOR {index} / 04</span>
+        <span class="shard__progress" aria-hidden="true"><i></i></span>
+        <span class="shard__meta num">INTEGRITY <b>100%</b></span>
+        <span>EOF // {code}</span>
+      </footer>
+    </div>
+  </div>
+</section>

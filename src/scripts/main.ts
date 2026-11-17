@@ -149,6 +149,44 @@ cipherButton?.addEventListener('click', () => {
   cipherButton.disabled = true;
 });
 
+/* ---------- Scroll-driven HUD buffer ---------- */
+const bufferReadout = document.querySelector<HTMLElement>('[data-buffer]');
+const updateScrollHud = () => {
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+  document.documentElement.style.setProperty('--scroll', progress.toFixed(4));
+  if (bufferReadout) bufferReadout.textContent = String(Math.round(progress * 100)).padStart(2, '0');
+};
+window.addEventListener('scroll', updateScrollHud, { passive: true });
+window.addEventListener('resize', updateScrollHud);
+updateScrollHud();
+
+/* ---------- Neural-link boot overlay (once per session) ---------- */
+const boot = document.querySelector<HTMLElement>('#boot');
+if (boot) {
+  let seen = false;
+  try {
+    seen = sessionStorage.getItem('datashard-boot') === '1';
+  } catch {
+    // Storage may be blocked; the overlay still runs once per page load.
+  }
+
+  if (seen || reducedMotion) {
+    boot.classList.add('is-done');
+  } else {
+    try {
+      sessionStorage.setItem('datashard-boot', '1');
+    } catch {
+      // Ignore storage failures.
+    }
+    const finishBoot = () => boot.classList.add('is-done');
+    window.setTimeout(finishBoot, 1250);
+    boot.querySelector('[data-boot-skip]')?.addEventListener('click', finishBoot);
+    boot.addEventListener('click', finishBoot);
+    window.addEventListener('keydown', finishBoot, { once: true });
+  }
+}
+
 /* ---------- Printable CV ---------- */
 document.querySelector<HTMLButtonElement>('#print-cv')?.addEventListener('click', () => window.print());
 

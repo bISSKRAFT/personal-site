@@ -1,4 +1,5 @@
 ---
+import Shard from './Shard.astro';
 import { site } from '../data/site';
 
 const parts = site.name.trim().split(/\s+/);
@@ -15,10 +16,10 @@ const tickerItems = [
 ];
 ---
 
-<section class="hero" id="top">
-  <div class="shell hero__grid">
-    <div class="hero__copy" data-reveal>
-      <p class="eyebrow"><span class="eyebrow__bar"></span> DATASHARD // PERSONNEL DOSSIER</p>
+<Shard id="top" index="00" code="0x00" label="PERSONNEL DOSSIER" class="hero">
+  <div class="hero__grid">
+    <div class="hero__copy">
+      <p class="eyebrow"><span class="eyebrow__bar"></span> IDENTITY CONFIRMED <span class="blink">_</span></p>
 
       <h1 class="hero__title">
         <span class="glitch" data-text={firstName}>{firstName}</span>
@@ -45,7 +46,7 @@ const tickerItems = [
       </div>
     </div>
 
-    <div class="hero__card" data-reveal>
+    <div class="hero__card">
       <div class="panel id-card">
         <div class="id-card__head">
           <span>DATASHARD_0x7F // 04</span>
@@ -77,14 +78,14 @@ const tickerItems = [
       </div>
     </div>
   </div>
+</Shard>
 
-  <div class="ticker" aria-hidden="true">
-    <div class="ticker__track">
-      {[0, 1].map(() => (
-        <div class="ticker__chunk">
-          {tickerItems.map((item) => <span>{item}</span>)}
-        </div>
-      ))}
-    </div>
+<div class="ticker" aria-hidden="true">
+  <div class="ticker__track">
+    {[0, 1].map(() => (
+      <div class="ticker__chunk">
+        {tickerItems.map((item) => <span>{item}</span>)}
+      </div>
+    ))}
   </div>
-</section>
+</div>

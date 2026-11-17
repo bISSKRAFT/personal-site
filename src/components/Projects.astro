@@ -1,4 +1,5 @@
 ---
+import Shard from './Shard.astro';
 import { site } from '../data/site';
 
 function statusClass(status: string) {
@@ -8,41 +9,37 @@ function statusClass(status: string) {
 }
 ---
 
-<section class="section projects" id="projects">
-  <div class="shell">
-    <div class="section-head" data-reveal>
-      <div class="section-head__num">03</div>
-      <div class="section-head__text">
-        <p class="section-head__kicker">// ARCHIVE OF BUILT THINGS</p>
-        <h2 class="section-head__title">Projects</h2>
-      </div>
-      <div class="section-head__rule" aria-hidden="true"></div>
-    </div>
+<Shard id="projects" index="03" code="0x03" label="PROJECT ARCHIVE" title="Projects">
+  <div class="projects__grid">
+    {site.projects.map((project) => (
+      <article class="panel project-card">
+        <span class="project-card__reticle" aria-hidden="true"><i>LOCK</i></span>
+        <div class="project-card__bar">
+          <span>PRJ_SHARD_0x03.{project.index}</span>
+          <span class={`project-card__status ${statusClass(project.status)}`}>{project.status}</span>
+        </div>
 
-    <div class="projects__grid">
-      {site.projects.map((project) => (
-        <article class="panel project-card" data-reveal>
-          <div class="project-card__visual" aria-hidden="true">
-            <span class="project-card__num">{project.index}</span>
-            <span class={`project-card__status ${statusClass(project.status)}`}>{project.status}</span>
+        <div class="project-card__visual" aria-hidden="true">
+          <span class="project-card__num">{project.index}</span>
+          <span class="project-card__readout">DATA_LINK // STABLE</span>
+        </div>
+
+        <div class="project-card__body">
+          <h3 class="project-card__name">{project.name}</h3>
+          <p class="project-card__desc">{project.description}</p>
+          <p class="project-card__tags">
+            {project.tags.map((tag) => <span>{tag}</span>)}
+          </p>
+          <div class="project-card__links">
+            {project.live && (
+              <a class="project-link" href={project.live} target="_blank" rel="noopener noreferrer">Live Demo</a>
+            )}
+            {project.source && (
+              <a class="project-link" href={project.source} target="_blank" rel="noopener noreferrer">Source Code</a>
+            )}
           </div>
-          <div class="project-card__body">
-            <h3 class="project-card__name">{project.name}</h3>
-            <p class="project-card__desc">{project.description}</p>
-            <p class="project-card__tags">
-              {project.tags.map((tag) => <span>{tag}</span>)}
-            </p>
-            <div class="project-card__links">
-              {project.live && (
-                <a class="project-link" href={project.live} target="_blank" rel="noopener noreferrer">Live Demo</a>
-              )}
-              {project.source && (
-                <a class="project-link" href={project.source} target="_blank" rel="noopener noreferrer">Source Code</a>
-              )}
-            </div>
-          </div>
-        </article>
-      ))}
-    </div>
+        </div>
+      </article>
+    ))}
   </div>
-</section>
+</Shard>

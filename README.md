@@ -1,6 +1,6 @@
 # Personal Site — Cyberpunk Datashard
 
-A single-page personal site built with [Astro](https://astro.build/), styled after the red **datashard** UI from Cyberpunk 2077: CRT scanlines, glitch text, angular panels, terminal readouts, and a harsh red-on-black palette.
+A single-page personal site built with [Astro](https://astro.build/), styled after the **netrunner / datashard** UI from Cyberpunk 2077: CRT scanlines, glitch text, angular panels, terminal readouts, a signature yellow interface, cyan data layers, and red reserved for alerts.
 
 It is fully static and set up to deploy to GitHub Pages with GitHub Actions.
 
@@ -52,10 +52,10 @@ To set a custom canonical domain, pass `SITE_URL=https://your-domain.tld` to the
 
 ```
 src/
-  components/     Hero, Identity, CV, Projects, Contact, Nav, Footer
+  components/     Shard (shared datashard frame), Hero, Identity, CV, Projects, Contact, Nav, Footer
   data/site.ts    all editable content
-  layouts/        BaseLayout (head, fonts, CRT overlay)
-  scripts/main.ts navigation, scroll reveals, terminal typing, clock, copy button
+  layouts/        BaseLayout (head, fonts, CRT overlay, HUD rails, boot sequence)
+  scripts/main.ts navigation, reveals, terminal typing, clock, copy, scroll HUD, boot
   styles/         global.css
 public/            favicon.svg, avatar.svg, .nojekyll
 .github/workflows/deploy.yml

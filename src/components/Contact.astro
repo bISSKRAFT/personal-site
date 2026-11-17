@@ -1,19 +1,19 @@
 ---
+import Shard from './Shard.astro';
 import { site } from '../data/site';
 ---
 
-<section class="section contact" id="contact">
-  <div class="shell contact__grid">
-    <div data-reveal>
-      <p class="eyebrow"><span class="eyebrow__bar"></span> // OPEN CHANNEL</p>
-      <h2 class="contact__lead">Got a job, an idea, or a good story?</h2>
+<Shard id="contact" index="04" code="0x04" label="OPEN CHANNEL" title="Contact">
+  <div class="contact__grid">
+    <div>
+      <p class="contact__lead">Got a job, an idea, or a good story?</p>
       <p class="contact__text">
         My inbox is always open. Send a message and I'll get back to you within 48 hours — usually faster.
       </p>
       <p class="contact__status"><span class="pulse-dot" aria-hidden="true"></span> {site.availability}</p>
     </div>
 
-    <div class="terminal panel" data-reveal>
+    <div class="terminal panel">
       <div class="terminal__bar">
         <span>root@datashard:~/comms</span>
         <span class="terminal__dots" aria-hidden="true"><i></i><i></i><i></i></span>
@@ -40,4 +40,4 @@ import { site } from '../data/site';
       </div>
     </div>
   </div>
-</section>
+</Shard>
