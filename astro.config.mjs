@@ -9,11 +9,13 @@ function normalizeBase(value) {
   return trimmed ? `/${trimmed}/` : '/';
 }
 
-const [owner, repo] = (process.env.GITHUB_REPOSITORY ?? 'username/username.github.io').split('/');
+const repository = process.env.GITHUB_REPOSITORY;
+const [owner, repo] = (repository ?? 'username/username.github.io').split('/');
 const base = normalizeBase(process.env.BASE_PATH ?? (repo && !repo.endsWith('.github.io') ? repo : '/'));
+const site = process.env.SITE_URL ?? (repository ? `https://${owner}.github.io` : undefined);
 
 export default defineConfig({
-  site: process.env.SITE_URL ?? `https://${owner}.github.io`,
+  site,
   base,
   output: 'static',
   build: { format: 'directory' },

@@ -1,6 +1,6 @@
 ---
 import Shard from './Shard.astro';
-import { site } from '../data/site';
+import { site, features } from '../data/site';
 
 const parts = site.name.trim().split(/\s+/);
 const firstName = parts.shift() ?? site.name;
@@ -36,7 +36,9 @@ const tickerItems = [
             <path d="M5 12h14M13 6l6 6-6 6" />
           </svg>
         </a>
-        <a class="btn btn--ghost" href="#projects">VIEW PROJECTS</a>
+        <a class="btn btn--ghost" href="#projects">
+          {features.projects && site.projects.length > 0 ? 'VIEW PROJECTS' : 'PROJECT ARCHIVE'}
+        </a>
       </div>
 
       <div class="hero__meta">
@@ -59,11 +61,11 @@ const tickerItems = [
           </div>
           <dl class="id-card__fields">
             <dt>ID</dt>
-            <dd class="accent">{site.initials}-77//042</dd>
+            <dd class="accent">{site.initials}-99//042</dd>
             <dt>Name</dt>
             <dd>{site.name}</dd>
             <dt>Class</dt>
-            <dd>Developer</dd>
+            <dd>Frontend Netrunner <span class="id-card__level num">LVL 04</span></dd>
             <dt>Origin</dt>
             <dd>{site.location}</dd>
             <dt>Access</dt>

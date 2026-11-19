@@ -2,7 +2,7 @@
 import Shard from './Shard.astro';
 import { site } from '../data/site';
 
-const { experience, education, skills } = site.cv;
+const { experience, education, publications, skills } = site.cv;
 ---
 
 <Shard id="cv" index="02" code="0x02" label="CURRICULUM VITAE" title="Career Log">
@@ -16,7 +16,7 @@ const { experience, education, skills } = site.cv;
         </div>
 
         <div class="cv__group">
-          <h3 class="cv__subhead">// WORK HISTORY</h3>
+          <h3 class="cv__subhead">// EXPERIENCE</h3>
           <div class="timeline">
             {experience.map((job, i) => (
               <div class="netnode">
@@ -36,12 +36,16 @@ const { experience, education, skills } = site.cv;
                   </div>
                   <p class="timeline__org">{job.company} <span>// {job.location}</span></p>
                   <p class="timeline__summary">{job.summary}</p>
-                  <ul class="timeline__points">
-                    {job.points.map((point) => <li>{point}</li>)}
-                  </ul>
-                  <div class="timeline__stack">
-                    {job.stack.map((tool) => <span>{tool}</span>)}
-                  </div>
+                  {job.points.length > 0 && (
+                    <ul class="timeline__points">
+                      {job.points.map((point) => <li>{point}</li>)}
+                    </ul>
+                  )}
+                  {job.stack.length > 0 && (
+                    <div class="timeline__stack">
+                      {job.stack.map((tool) => <span>{tool}</span>)}
+                    </div>
+                  )}
                 </article>
               </div>
             ))}
@@ -55,7 +59,7 @@ const { experience, education, skills } = site.cv;
         </div>
 
         <div class="cv__group">
-          <h3 class="cv__subhead">// EDUCATION &amp; CERTS</h3>
+          <h3 class="cv__subhead">// EDUCATION</h3>
           <div class="timeline">
             {education.map((entry, i) => (
               <div class="netnode">
@@ -75,6 +79,48 @@ const { experience, education, skills } = site.cv;
                   </div>
                   <p class="timeline__org">{entry.school}</p>
                   <p class="timeline__summary">{entry.detail}</p>
+                </article>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="netmap__bridge" aria-hidden="true">
+          <span>◈ RELAY_02</span>
+          <span class="netmap__bridge-line"></span>
+          <span>DOCUMENT ACCESS</span>
+        </div>
+
+        <div class="cv__group">
+          <h3 class="cv__subhead">// PUBLICATIONS</h3>
+          <div class="timeline">
+            {publications.map((publication, i) => (
+              <div class="netnode">
+                <div class="netnode__rail" aria-hidden="true">
+                  <span class="netnode__id num">P{String(i + 1).padStart(2, '0')}</span>
+                  <span class="netnode__dot"></span>
+                  <span class="netnode__link"></span>
+                </div>
+                <article class="timeline__item record">
+                  <div class="record__bar num">
+                    <span>LOG_0x02.P{String(i + 1).padStart(2, '0')}</span>
+                    <span>PUBLICATION</span>
+                  </div>
+                  <div class="timeline__top">
+                    <h4 class="timeline__role">{publication.title}</h4>
+                    <span class="timeline__period num">{publication.date}</span>
+                  </div>
+                  <p class="timeline__org">{publication.venue}</p>
+                  <div class="publication__links">
+                    <a
+                      class="project-link"
+                      href={publication.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Read Paper
+                    </a>
+                  </div>
                 </article>
               </div>
             ))}

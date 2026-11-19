@@ -1097,6 +1097,18 @@ p {
   color: var(--yellow);
 }
 
+.id-card__level {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 5px;
+  border: 1px solid rgba(252, 238, 9, 0.45);
+  color: var(--yellow);
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  line-height: 1.5;
+  vertical-align: 1px;
+}
+
 .id-card__footer {
   padding-top: 14px;
   border-top: 1px solid var(--line);
@@ -1699,6 +1711,108 @@ p {
   gap: 24px;
 }
 
+/* Sealed project shard shown while `features.projects` is false. */
+.locked {
+  border-color: rgba(255, 45, 63, 0.32);
+  background: linear-gradient(150deg, rgba(255, 45, 63, 0.06), transparent 55%), var(--bg-soft);
+  box-shadow: inset 0 0 50px rgba(255, 45, 63, 0.04);
+}
+
+.locked.panel::before,
+.locked.panel::after {
+  border-color: var(--red);
+}
+
+.locked__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 14px;
+  border-bottom: 1px solid rgba(255, 45, 63, 0.3);
+  background: linear-gradient(90deg, rgba(255, 45, 63, 0.14), transparent);
+  color: var(--red);
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.locked__body {
+  padding: 36px 28px;
+  text-align: center;
+}
+
+.locked__code {
+  color: var(--red);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+}
+
+.locked__title {
+  margin-top: 10px;
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 3vw, 1.9rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.locked__text {
+  max-width: 52ch;
+  margin: 14px auto 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.locked__redactions {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 22px 0;
+}
+
+.locked__redactions span {
+  height: 10px;
+  background: repeating-linear-gradient(90deg, rgba(255, 45, 63, 0.42) 0 6px, transparent 6px 10px);
+}
+
+.locked__redactions span:nth-child(1) { width: 72px; }
+.locked__redactions span:nth-child(2) { width: 44px; }
+.locked__redactions span:nth-child(3) { width: 60px; }
+.locked__redactions span:nth-child(4) { width: 34px; }
+
+.locked__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--red);
+  font-size: 0.64rem;
+  letter-spacing: 0.16em;
+}
+
+.locked__status .pulse-dot {
+  background: var(--red);
+  box-shadow: 0 0 10px var(--red);
+}
+
+/* The sealed state turns the project shard's blue frame back to alert red. */
+.shard-section#projects.shard--locked .shard__bar {
+  background: linear-gradient(90deg, rgba(255, 45, 63, 0.14), transparent);
+}
+
+.shard-section#projects.shard--locked .shard__code {
+  color: var(--red);
+}
+
+.shard-section#projects.shard--locked .shard__status {
+  color: var(--red);
+}
+
+.shard-section#projects.shard--locked .shard__status .pulse-dot {
+  background: var(--red);
+  box-shadow: 0 0 10px var(--red);
+}
+
 .project-card {
   position: relative;
   display: flex;
@@ -1879,6 +1993,14 @@ p {
 
 .project-link:hover {
   color: var(--yellow);
+}
+
+.publication__links {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(0, 229, 255, 0.18);
 }
 
 /* Target-lock hover: crosshair + brackets closing in. */

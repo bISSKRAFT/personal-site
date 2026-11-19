@@ -1,45 +1,97 @@
 ---
 import Shard from './Shard.astro';
-import { site } from '../data/site';
+import { site, features } from '../data/site';
 
 function statusClass(status: string) {
   if (status === 'IN DEV') return 'project-card__status--dev';
   if (status === 'ARCHIVED') return 'project-card__status--archived';
   return '';
 }
+
+const hasProjects = features.projects && site.projects.length > 0;
 ---
 
-<Shard id="projects" index="03" code="0x03" label="PROJECT ARCHIVE" title="Projects">
-  <div class="projects__grid">
-    {site.projects.map((project) => (
-      <article class="panel project-card">
-        <span class="project-card__reticle" aria-hidden="true"><i>LOCK</i></span>
-        <div class="project-card__bar">
-          <span>PRJ_SHARD_0x03.{project.index}</span>
-          <span class={`project-card__status ${statusClass(project.status)}`}>{project.status}</span>
-        </div>
+<Shard
+  id="projects"
+  index="03"
+  code="0x03"
+  label="PROJECT ARCHIVE"
+  title="Projects"
+  class={hasProjects ? undefined : 'shard--locked'}
+>
+  {
+    hasProjects ? (
+      <div class="projects__grid">
+        {site.projects.map((project) => (
+          <article class="panel project-card">
+            <span class="project-card__reticle" aria-hidden="true">
+              <i>LOCK</i>
+            </span>
+            <div class="project-card__bar">
+              <span>PRJ_SHARD_0x03.{project.index}</span>
+              <span class={`project-card__status ${statusClass(project.status)}`}>
+                {project.status}
+              </span>
+            </div>
 
-        <div class="project-card__visual" aria-hidden="true">
-          <span class="project-card__num">{project.index}</span>
-          <span class="project-card__readout">DATA_LINK // STABLE</span>
-        </div>
+            <div class="project-card__visual" aria-hidden="true">
+              <span class="project-card__num">{project.index}</span>
+              <span class="project-card__readout">DATA_LINK // STABLE</span>
+            </div>
 
-        <div class="project-card__body">
-          <h3 class="project-card__name">{project.name}</h3>
-          <p class="project-card__desc">{project.description}</p>
-          <p class="project-card__tags">
-            {project.tags.map((tag) => <span>{tag}</span>)}
+            <div class="project-card__body">
+              <h3 class="project-card__name">{project.name}</h3>
+              <p class="project-card__desc">{project.description}</p>
+              <p class="project-card__tags">
+                {project.tags.map((tag) => <span>{tag}</span>)}
+              </p>
+              <div class="project-card__links">
+                {project.live && (
+                  <a
+                    class="project-link"
+                    href={project.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Live Demo
+                  </a>
+                )}
+                {project.source && (
+                  <a
+                    class="project-link"
+                    href={project.source}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Source Code
+                  </a>
+                )}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    ) : (
+      <div class="locked panel">
+        <div class="locked__bar num">
+          <span>ARCHIVE_0x03 // SEALED</span>
+          <span>ACCESS RESTRICTED</span>
+        </div>
+        <div class="locked__body">
+          <p class="locked__code num">// CLEARANCE LEVEL 05 REQUIRED</p>
+          <p class="locked__title">Project Archive Offline</p>
+          <p class="locked__text">
+            No verified work has been declassified yet. This sector will unlock once the
+            operator publishes project files.
           </p>
-          <div class="project-card__links">
-            {project.live && (
-              <a class="project-link" href={project.live} target="_blank" rel="noopener noreferrer">Live Demo</a>
-            )}
-            {project.source && (
-              <a class="project-link" href={project.source} target="_blank" rel="noopener noreferrer">Source Code</a>
-            )}
+          <div class="locked__redactions" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
           </div>
+          <p class="locked__status num">
+            <span class="pulse-dot" aria-hidden="true"></span> AWAITING UPLINK
+          </p>
         </div>
-      </article>
-    ))}
-  </div>
+      </div>
+    )
+  }
 </Shard>

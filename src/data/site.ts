@@ -1,8 +1,8 @@
 /**
- * ALL SITE CONTENT LIVES HERE.
- * ----------------------------
- * Everything below is placeholder data. Replace the name, contact details,
- * CV entries and project links with your own, then run `npm run dev` to preview.
+ * SITE CONTENT
+ * ------------
+ * Edit the values below to update the site. Section labels and decorative
+ * UI copy (ticker, ID card, terminal text) live in the components.
  */
 
 export interface SocialLink {
@@ -28,6 +28,13 @@ export interface Education {
   detail: string;
 }
 
+export interface Publication {
+  title: string;
+  venue: string;
+  date: string;
+  url: string;
+}
+
 export interface SkillGroup {
   category: string;
   skills: { name: string; level: number }[];
@@ -37,164 +44,184 @@ export interface Project {
   index: string;
   name: string;
   description: string;
-  status: 'ONLINE' | 'IN DEV' | 'ARCHIVED';
+  status: "ONLINE" | "IN DEV" | "ARCHIVED";
   tags: string[];
   live?: string;
   source?: string;
 }
 
+/**
+ * Feature flags.
+ * Flip a flag to true when the content behind it is ready to publish.
+ * `projects: false` keeps section 03 in place as a sealed "access restricted"
+ * shard instead of rendering the project cards below.
+ */
+export const features = {
+  projects: false,
+} as const;
+
 export const site = {
   // Identity
-  name: 'Riley Nova',
-  initials: 'RN',
-  role: 'Full-Stack Developer // Creative Technologist',
-  tagline: 'I build fast, resilient interfaces for messy, interesting problems.',
-  motto: 'Treat the browser as a canvas and the codebase as a city.',
-  bio: 'Developer and design-systems nerd focused on the seam between performance and personality. I ship production web apps, tinker with rendering pipelines, and care a lot about the details you feel but never notice.',
-  location: 'Berlin, DE — Remote',
-  timezone: 'Europe/Berlin',
-  availability: 'OPEN FOR CONTRACT WORK',
-  clearance: 'LEVEL 04 // NETRUNNER',
-  email: 'hello@example.com',
+  name: "Leo Donisch",
+  initials: "LD",
+  role: "Full-Stack Developer // Creative Technologist",
+  description:
+    "Frontend-focused software engineer at DATEV — Angular, TypeScript and NgRx, with backend work in Java, Spring WebFlux and MongoDB.",
+  tagline: "Frontends built to be maintained, not just shipped.",
+  motto: "Make it work. Make it last. Make it obvious.",
+  bio:
+    "Frontend-focused software engineer at DATEV, building Angular applications with TypeScript and NgRx. I test with Vitest, step into Java, reactive Spring WebFlux and MongoDB when a feature needs it, and hold an M.A. in Applied AI with published research on LLM inference optimization.",
+  location: "Nuremberg, DE — Remote",
+  timezone: "Europe/Berlin",
+  availability: "NOT OPEN FOR WORK",
+  clearance: "LEVEL 04 // NETRUNNER",
+  email: "hello@example.com",
   // No phone number is stored in this repo. This is a decorative token only:
   // it is not derived from a real number and cannot be decrypted.
-  commsMask: '+██ ███ ███ ██▓▓',
-  commsKey: '0x7F2A:9C44:0E1B:3D68',
-  languages: 'English (native), German (fluent)',
-  interests: ['Interface engineering', 'Generative art', 'Synthwave', 'Urban photography'],
+  commsMask: "+██ ███ ███ ██▓▓",
+  commsKey: "0x7F2A:9C44:0E1B:3D68",
+  languages: "German (native), English (fluent)",
+  interests: [
+    "Interface engineering",
+    "System Design & Software Architecture",
+    "Road Biking",
+    "Learning",
+    "Films",
+  ],
 
   socials: [
-    { label: 'GitHub', handle: '@your-handle', url: 'https://github.com/' },
-    { label: 'LinkedIn', handle: '/in/your-handle', url: 'https://www.linkedin.com/' },
-    { label: 'Bluesky', handle: '@your-handle', url: 'https://bsky.app/' },
+    { label: "GitHub", handle: "@bISSKRAFT", url: "https://github.com/bISSKRAFT" },
+    {
+      label: "LinkedIn",
+      handle: "/in/leo-donisch-009889253",
+      url: "https://www.linkedin.com/in/leo-donisch-009889253/",
+    },
   ] satisfies SocialLink[],
 
   cv: {
     experience: [
       {
-        role: 'Senior Full-Stack Engineer',
-        company: 'Helix Dynamics',
-        period: '2022 — PRESENT',
-        location: 'Remote',
-        summary: 'Lead engineer for a real-time analytics platform used by 40+ enterprise teams.',
-        points: [
-          'Rebuilt the ingestion pipeline in Rust, cutting p95 latency by 68%.',
-          'Designed a composable design system adopted across six product teams.',
-          'Mentored four engineers and introduced automated accessibility testing.',
-        ],
-        stack: ['TypeScript', 'Rust', 'Astro', 'PostgreSQL'],
+        role: "Professional Software Engineer Cloud Native",
+        company: "DATEV eG",
+        period: "June 2024 — Present",
+        location: "Nuremberg, Bavaria · Hybrid",
+        summary: "Cloud-native software engineering at DATEV eG.",
+        points: [],
+        stack: ["Angular", "TypeScript", "NgRx", "Vitest", "Java", "Spring WebFlux", "MongoDB"],
       },
       {
-        role: 'Frontend Engineer',
-        company: 'Nightline Labs',
-        period: '2019 — 2022',
-        location: 'Berlin, DE',
-        summary: 'Owned the customer-facing dashboard and its performance budget.',
-        points: [
-          'Shipped a component library that cut feature delivery time in half.',
-          'Reduced initial bundle size from 1.4 MB to 280 KB with code splitting.',
-          'Built an internal tool for visualizing live event streams.',
-        ],
-        stack: ['React', 'TypeScript', 'GraphQL', 'WebGL'],
+        role: "Working Student, Software Development",
+        company: "DATEV eG",
+        period: "Oct. 2022 — June 2024",
+        location: "Nuremberg, Bavaria",
+        summary: "Working student in software development at DATEV eG.",
+        points: [],
+        stack: [],
       },
       {
-        role: 'Software Engineering Intern',
-        company: 'Gridworks',
-        period: '2018 — 2019',
-        location: 'Munich, DE',
-        summary: 'Supported the platform team on internal tooling and test infrastructure.',
-        points: [
-          'Automated release checks for 12 microservices.',
-          'Wrote the first end-to-end test suite for the billing portal.',
-        ],
-        stack: ['Python', 'Docker', 'Jenkins'],
+        role: "Working Student, Software Development (Data & Testing)",
+        company: "DATEV eG",
+        period: "Mar. 2021 — Sep. 2022",
+        location: "Nuremberg, Bavaria",
+        summary:
+          "Analyzed and evaluated usage data and created and oversaw tests in a domain-specific language project.",
+        points: [],
+        stack: ["Test Management", "JetBrains MPS"],
+      },
+      {
+        role: "Bachelor's Thesis Candidate",
+        company: "DATEV eG",
+        period: "Sep. 2021 — Mar. 2022",
+        location: "Nuremberg, Bavaria",
+        summary:
+          "Bachelor's thesis: identifying tax-relevant information in documents using machine learning.",
+        points: [],
+        stack: ["Machine Learning", "Data Science"],
+      },
+      {
+        role: "Software Development Intern",
+        company: "Siemens Digital Industries Software",
+        period: "Sep. 2020 — Feb. 2021",
+        location: "Nuremberg, Bavaria",
+        summary:
+          "Helped design and develop an application launcher with an analysis function.",
+        points: [],
+        stack: ["SQL", "Testing"],
+      },
+      {
+        role: "Working Student, Software Development",
+        company: "Siemens Digital Industries Software",
+        period: "Mar. 2020 — Aug. 2020",
+        location: "Nürnberger Land, Bavaria",
+        summary: "Developed an analytics tool in a production environment.",
+        points: [],
+        stack: ["SQL", "Python"],
       },
     ] satisfies Experience[],
 
     education: [
       {
-        degree: 'B.Sc. Computer Science',
-        school: 'Technical University of Munich',
-        period: '2015 — 2019',
-        detail: 'Thesis: real-time rendering of large graph structures in the browser.',
+        degree:
+          "M.A. — Applied Artificial Intelligence and Digital Transformation",
+        school: "Hochschule Ansbach — University of Applied Sciences",
+        period: "Oct. 2022 — July 2024",
+        detail: "Grade: 1.2. Focus: Data Science, Machine Learning.",
       },
       {
-        degree: 'CKA — Certified Kubernetes Administrator',
-        school: 'Cloud Native Computing Foundation',
-        period: '2023',
-        detail: 'Cluster operations, networking and workload orchestration.',
+        degree: "B.Sc. — Business Informatics",
+        school: "Technische Hochschule Nürnberg Georg Simon Ohm",
+        period: "Oct. 2018 — 2022",
+        detail: "Bachelor's programme in Business Informatics.",
       },
     ] satisfies Education[],
 
+    publications: [
+      {
+        title:
+          "Inference Optimizations for Large Language Models: Effects, Challenges, and Practical Considerations",
+        venue: "arXiv preprint arXiv:2408.03130",
+        date: "Aug. 2024",
+        url: "https://arxiv.org/abs/2408.03130",
+      },
+      {
+        title:
+          "Sentiment Analysis of Twitter Posts on COVID-19 Cultural Dimensions: Collectivist vs. Individualist",
+        venue: "SOTICS 2022 — Lisbon, Portugal",
+        date: "Oct. 2022",
+        url: "https://www.thinkmind.org/articles/sotics_2022_1_20_60004.pdf",
+      },
+    ] satisfies Publication[],
+
     skills: [
       {
-        category: 'LANGUAGES',
+        category: "FRONTEND",
         skills: [
-          { name: 'TypeScript / JavaScript', level: 94 },
-          { name: 'Python', level: 85 },
-          { name: 'Rust', level: 68 },
-          { name: 'SQL', level: 82 },
+          { name: "Angular", level: 92 },
+          { name: "TypeScript", level: 92 },
+          { name: "NgRx", level: 86 },
         ],
       },
       {
-        category: 'INTERFACE',
+        category: "TESTING",
         skills: [
-          { name: 'Astro / HTML / CSS', level: 93 },
-          { name: 'React', level: 88 },
-          { name: 'Design systems', level: 90 },
-          { name: 'WebGL / Canvas', level: 66 },
+          { name: "Vitest", level: 85 },
+          { name: "Jest (legacy)", level: 80 },
+          { name: "Spock", level: 70 },
         ],
       },
       {
-        category: 'SYSTEMS',
+        category: "BACKEND",
         skills: [
-          { name: 'Node.js', level: 88 },
-          { name: 'PostgreSQL', level: 82 },
-          { name: 'Docker / Kubernetes', level: 78 },
-          { name: 'AWS / GCP', level: 72 },
+          { name: "Java", level: 76 },
+          { name: "Groovy", level: 70 },
+          { name: "Reactive Spring (WebFlux)", level: 74 },
+          { name: "MongoDB", level: 72 },
         ],
       },
     ] satisfies SkillGroup[],
   },
 
-  projects: [
-    {
-      index: '01',
-      name: 'NEURAL_DECK',
-      description:
-        'A real-time telemetry dashboard for distributed sensor networks, with live maps, alerting and offline-first sync.',
-      status: 'ONLINE',
-      tags: ['TypeScript', 'WebGL', 'WebSockets'],
-      live: 'https://example.com/neural-deck',
-      source: 'https://github.com/',
-    },
-    {
-      index: '02',
-      name: 'GHOST_PROTOCOL',
-      description:
-        'A privacy-first authentication toolkit with passkeys, encrypted session storage and a tiny integration surface.',
-      status: 'IN DEV',
-      tags: ['Rust', 'WebAuthn', 'SQL'],
-      source: 'https://github.com/',
-    },
-    {
-      index: '03',
-      name: 'CHROME_OSINT',
-      description:
-        'Interactive data visualizations that turn messy public datasets into explorable, performant stories.',
-      status: 'ONLINE',
-      tags: ['D3.js', 'Astro', 'Data'],
-      live: 'https://example.com/chrome-osint',
-      source: 'https://github.com/',
-    },
-    {
-      index: '04',
-      name: 'SHARD_ARCHIVE',
-      description:
-        'A headless publishing setup for technical writing, built around local-first editing and instant previews.',
-      status: 'ARCHIVED',
-      tags: ['Astro', 'Markdown', 'Edge'],
-      source: 'https://github.com/',
-    },
-  ] satisfies Project[],
+  // Add real projects here, then set `features.projects` to true.
+  // The section stays sealed while this array is empty.
+  projects: [] as Project[],
 };
